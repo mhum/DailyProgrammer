@@ -28,7 +28,7 @@ public class IntersectingRectanglesTest {
 
       IntersectingRectangles.main(in);
 
-      assertEquals("1.0", outContent.toString());
+      assertEquals("1.00", outContent.toString());
 
     }
 
@@ -50,7 +50,18 @@ public class IntersectingRectanglesTest {
 
       IntersectingRectangles.main(in);
 
-      assertEquals("0.0", outContent.toString());
+      assertEquals("0.00", outContent.toString());
+
+    }
+
+    @Test
+    public void test4() {
+
+      String[] in = {"-3,0 1.8,4", "1,1 -2.5,3.6", "-4.1,5.75 0.5,2", "-1.0,4.6 -2.9,-0.8"};
+
+      IntersectingRectangles.main(in);
+
+      assertEquals("2.40", outContent.toString());
 
     }
 

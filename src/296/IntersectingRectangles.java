@@ -1,24 +1,28 @@
-import java.util.ArrayList;
-
 public class IntersectingRectangles {
 
   public static void main(String[] args) {
-    ArrayList<Rectangle> rectangles = new ArrayList<>();
+    Rectangle overlap = new Rectangle(args[0]);
 
-    for (String coords : args) {
-      Rectangle rectangle = new Rectangle(coords);
-      rectangles.add(rectangle);
+    for (int x = 0; x < args.length; x++) {
+      if (x != 0) {
+        Rectangle rectangle = new Rectangle(args[x]);
+        overlap = getOverlap(rectangle, overlap);
+      }
     }
 
-    double top = Math.max(rectangles.get(0).top, rectangles.get(1).top);
-    double bottom = Math.min(rectangles.get(0).bottom, rectangles.get(1).bottom);
-    double right = Math.min(rectangles.get(0).right, rectangles.get(1).right);
-    double left = Math.max(rectangles.get(0).left, rectangles.get(1).left);
+    double area = overlap.area();
 
-    double area = (top >= bottom) || (left >= right) ? 0.0 : (bottom - top) * (right - left);
+    System.out.printf("%.2f", area);
 
-    System.out.print(area);
+  }
 
+  public static Rectangle getOverlap(Rectangle rec1, Rectangle rec2) {
+    double top = Math.max(rec1.top, rec2.top);
+    double bottom = Math.min(rec1.bottom, rec2.bottom);
+    double left = Math.max(rec1.left, rec2.left);
+    double right = Math.min(rec1.right, rec2.right);
+
+    return new Rectangle(top, bottom, left, right);
   }
 }
 
@@ -36,6 +40,16 @@ class Rectangle {
     left = Math.min(Double.parseDouble(a.split(",")[0]), Double.parseDouble(b.split(",")[0]));
     bottom = Math.max(Double.parseDouble(a.split(",")[1]), Double.parseDouble(b.split(",")[1]));
     right = Math.max(Double.parseDouble(a.split(",")[0]), Double.parseDouble(b.split(",")[0]));
+  }
 
+  public Rectangle(double top, double bottom, double left, double right) {
+    this.top = top;
+    this.bottom = bottom;
+    this.left = left;
+    this.right = right;
+  }
+
+  public double area() {
+    return (top >= bottom) || (left >= right) ? 0.0 : (bottom - top) * (right - left);
   }
 }
