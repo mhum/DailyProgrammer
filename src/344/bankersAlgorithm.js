@@ -37,15 +37,10 @@ function loadFile(path) {
  * @returns {boolean} - Is there enough resources for the process
  */
 function isEnoughForProcess(process, processIndex, resources) {
-  let isEnough = true;
-  process.forEach((resource, resourceIndex) => {
+  return process.every((resource, resourceIndex) => {
     const neededResource = resources.maxResources[processIndex][resourceIndex] - resource;
-    if (resources.availableResources[resourceIndex] < neededResource) {
-      isEnough = false;
-    }
+    return resources.availableResources[resourceIndex] >= neededResource;
   });
-
-  return isEnough;
 }
 
 /**
