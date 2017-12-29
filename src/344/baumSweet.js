@@ -3,7 +3,7 @@
 * @param {integer} number -Number to calculate
 * @returns {integer} - Baum-Sweet value
 * */
-function getBaumSweet(number) {
+const getBaumSweet = (number) => {
   if (number === 0) {
     return 1;
   }
@@ -24,7 +24,7 @@ function getBaumSweet(number) {
   }
 
   return numZeroes % 2 === 1 ? 0 : 1;
-}
+};
 
 /**
 * Print the Baum-Sweet seqeuence from 0 to the given number
